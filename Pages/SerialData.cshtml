@@ -1,0 +1,13 @@
+﻿@page
+@model POS.Pages.SerialDataModel
+
+<h2>Serial Port Data</h2>
+
+<div>
+    <strong>Latest Data:</strong>
+    <p>@Model.LatestData</p>
+</div>
+
+<form method="get">
+    <button type="submit">Refresh Data</button>
+</form>

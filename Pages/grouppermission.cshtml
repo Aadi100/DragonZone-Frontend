@@ -1,0 +1,340 @@
+﻿@page
+@model grouppermissionModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dreams Pos admin template</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+    </div>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left active">
+                <a href="index.html" class="logo" style="display: inline-block; width: 100px; height: 50px;">
+                    <img src="assets/img/Nlogo.png" alt="" style="max-width: 100%; max-height: 100%; display: block;">
+                </a>
+                <a id="toggle_btn" href="javascript:void(0);"></a>
+            </div>
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <ul class="nav user-menu">
+
+                <li class="nav-item">
+                    <div class="top-nav-search">
+                        <a href="javascript:void(0);" class="responsive-search">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <form action="#">
+                            <div class="searchinputs">
+                                <input type="text" placeholder="Search Here ...">
+                                <div class="search-addon">
+                                    <span><img src="assets/img/icons/closes.svg" alt="img"></span>
+                                </div>
+                            </div>
+                            <a class="btn" id="searchdiv"><img src="assets/img/icons/search.svg" alt="img"></a>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                        <span class="user-img">
+                            <img src="assets/img/profiles/avator1.jpg" alt="">
+                            <span class="status online"></span>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu menu-drop-user">
+                        <div class="profilename">
+                            <div class="profileset">
+                                <span class="user-img">
+                                    <img src="assets/img/profiles/avator1.jpg" alt="">
+                                    <span class="status online"></span>
+                                </span>
+                                <div class="profilesets">
+                                    <h6>John Doe</h6>
+                                    <h5>Admin</h5>
+                                </div>
+                            </div>
+                            <hr class="m-0">
+                            <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My Profile</a>
+                            <a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>
+                            <hr class="m-0">
+                            <a class="dropdown-item logout pb-0" href="signin.html"><img src="assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+            <div class="dropdown mobile-user-menu">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="generalsettings.html">Settings</a>
+                    <a class="dropdown-item" href="signin.html">Logout</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="active">
+                            <a asp-page="/index"><img src="assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/game.svg" alt="img"><span> Game</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addgame">Add Game</a></li>
+                                <li><a asp-page="/gamelist">Game List</a></li>
+                                <li><a asp-page="/editgame">Edit Game</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/organization.svg" alt="img"><span> Organization</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addorganization">Add Organization</a></li>
+                                <li><a asp-page="/organizationlist">List Organization</a></li>
+                                <li><a asp-page="/editorganization">Edit Organization</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/branch.svg" alt="img"><span> Branch</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addbranch">Add Branch</a></li>
+                                <li><a asp-page="/branchlist">List Branch</a></li>
+                                <li><a asp-page="/editbranch">Edit Branch</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/sales1.svg" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                @* <li><a asp-page="/SerialData">Manage</a></li> *@
+                                <li><a asp-page="/pos">POS</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/users1.svg" alt="img"><span> Member</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addmember">Add Member</a></li>
+                                <li><a asp-page="/memberlist">List Members</a></li>
+                                <li><a asp-page="/editmember">Edit Member</a></li>
+                                <li><a asp-page="/memberprofile">Member Profile</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/time.svg" alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/salesreport">Invoice Report</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/user2.svg" alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addemployee">Add User </a></li>
+                                <li><a asp-page="/edituser">Edit User</a></li>
+                                <li><a asp-page="/userlist">List Users</a></li>
+                                <li><a asp-page="/userhistory">User History</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/debitcard.svg" alt="img"><span>Rfcard</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/addrfcard">Add Rfcard </a></li>
+                                <li><a asp-page="/rfcardlist">Rfcard List </a></li>
+                                <li><a asp-page="/editrfcard">Edit Rfcard</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="assets/img/icons/settings.svg" alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a asp-page="/grouppermission">Group Permissions</a></li>
+                                <li><a asp-page="/config">Configuration</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Permissions</h4>
+                        <h6>Manage Permissions</h6>
+                    </div>
+                    <div class="page-btn">
+                        <a class="btn btn-added" href="createpermission.html"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Add Permission</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-top">
+                            <div class="search-set">
+                                <div class="search-input">
+                                    <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg" alt="img"></a>
+                                </div>
+                            </div>
+                            <div class="wordset">
+                                <ul>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="assets/img/icons/pdf.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="assets/img/icons/excel.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="assets/img/icons/printer.svg" alt="img"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table  datanew">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <label class="checkboxs">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>
+                                            </label>
+                                        </th>
+                                        <th>Role</th>
+                                        <th>description</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label class="checkboxs">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>
+                                            </label>
+                                        </td>
+                                        <td>Admin</td>
+                                        <td>Owner</td>
+                                        <td>
+                                            <span class="badges bg-lightgreen">Active</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <a class="me-3" href="editpermission.html">
+                                                <img src="assets/img/icons/edit.svg" alt="img">
+                                            </a>
+                                            <a class="me-3 confirm-text" href="javascript:void(0);">
+                                                <img src="assets/img/icons/delete.svg" alt="img">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkboxs">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>
+                                            </label>
+                                        </td>
+                                        <td>Purchase</td>
+                                        <td>Purchase Permission</td>
+                                        <td>
+                                            <span class="badges bg-lightgreen">Active</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <a class="me-3" href="editpermission.html">
+                                                <img src="assets/img/icons/edit.svg" alt="img">
+                                            </a>
+                                            <a class="me-3 confirm-text" href="javascript:void(0);">
+                                                <img src="assets/img/icons/delete.svg" alt="img">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkboxs">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>
+                                            </label>
+                                        </td>
+                                        <td>Sales</td>
+                                        <td>Sales Permission</td>
+                                        <td>
+                                            <span class="badges bg-lightgreen">Active</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <a class="me-3" href="editpermission.html">
+                                                <img src="assets/img/icons/edit.svg" alt="img">
+                                            </a>
+                                            <a class="me-3 confirm-text" href="javascript:void(0);">
+                                                <img src="assets/img/icons/delete.svg" alt="img">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/feather.min.js"></script>
+
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/plugins/select2/js/select2.min.js"></script>
+
+    <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script src="assets/js/script.js"></script>
+</body>

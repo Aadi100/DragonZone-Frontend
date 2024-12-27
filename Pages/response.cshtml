@@ -1,0 +1,17 @@
+﻿@page
+@model responseModel
+@{
+    var fullResponse = HttpContext.Session.GetString("FullResponse");
+   
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Response Page</title>
+</head>
+<body>
+    <h1>Response Content</h1>
+    <pre>@fullResponse</pre>
+</body>
+</html>

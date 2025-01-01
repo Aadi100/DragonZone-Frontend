@@ -17,7 +17,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.KnownProxies.Add(IPAddress.Parse("http://portal.thedragonzone.com/"));
 });
-//builder.Services.AddAuthentication();
+builder.Services.AddAuthentication();
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
@@ -37,9 +37,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
-//app.UseAuthentication();
+app.UseAuthentication();
 
-app.MapGet("/", () => "Hello ForwardedHeadersOptions!");
+app.MapGet("/", () => "Hello World!");
 
 app.UseAuthorization();
 

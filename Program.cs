@@ -39,7 +39,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseAuthentication();
 
-app.MapGet("/", () => "Hello World!");
+//app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => Results.Redirect("/signin"));
 
 app.UseAuthorization();
 

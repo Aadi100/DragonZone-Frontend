@@ -74,9 +74,9 @@ namespace POS.Pages
 
                 if (accessToken != null)
                 {
-                    return RedirectToPage("/Index");
+                    return Redirect("/Index");
                 }
-                return RedirectToPage("/Response");
+                return Redirect("/Response");
             }
             else
             {

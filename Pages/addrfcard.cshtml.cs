@@ -59,7 +59,7 @@ namespace POS.Pages
 
             if (string.IsNullOrEmpty(accessToken))
             {
-                return RedirectToPage("/signin");
+                return Redirect("/signin");
             }
 
             client.DefaultRequestHeaders.Add("x-session-key", accessToken);

@@ -116,7 +116,7 @@ namespace POS.Pages
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 //HttpContext.Session.SetString("FullResponse", responseContent);
-                //return RedirectToPage("/response");
+                //return Redirect("/response");
                 return Page();
             }
             else

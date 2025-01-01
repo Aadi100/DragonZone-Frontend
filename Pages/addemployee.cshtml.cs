@@ -134,7 +134,7 @@ namespace POS.Pages
             var accessToken = HttpContext.Session.GetString("SessionToken");
             if (string.IsNullOrEmpty(accessToken))
             {
-                return RedirectToPage("/signin");
+                return Redirect("/signin");
             }
 
             var client = _httpClientFactory.CreateClient();
@@ -347,10 +347,10 @@ namespace POS.Pages
             }
             else
             {
-                _logger.LogError("Error posting member data: {StatusCode}", response.StatusCode);
-                ModelState.AddModelError(string.Empty, "There was an error saving the member.");
-                //return Page();
-                return RedirectToPage("/response");
+                //_logger.LogError("Error posting member data: {StatusCode}", response.StatusCode);
+                //ModelState.AddModelError(string.Empty, "There was an error saving the member.");
+                return Page();
+                //return Redirect("/response");
             }
         }
 

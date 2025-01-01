@@ -94,7 +94,7 @@ namespace POS.Pages
             var accessToken = HttpContext.Session.GetString("SessionToken");
             if (string.IsNullOrEmpty(accessToken))
             {
-                return RedirectToPage("/signin");
+                return Redirect("/signin");
             }
 
             using (var client = new HttpClient())

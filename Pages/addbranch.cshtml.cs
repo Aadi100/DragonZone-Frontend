@@ -96,7 +96,7 @@ namespace POS.Pages
             var accessToken = HttpContext.Session.GetString("SessionToken");
             if (string.IsNullOrEmpty(accessToken))
             {
-                return RedirectToPage("/signin");
+                return Redirect("/signin");
             }
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Add("x-session-key", accessToken);
@@ -205,7 +205,7 @@ namespace POS.Pages
                 _logger.LogError("Error posting member data: {StatusCode}", response.StatusCode);
                 ModelState.AddModelError(string.Empty, "There was an error saving the member.");
                // return Page();
-                return RedirectToPage("/Index");
+                return Redirect("/Index");
             }
         }
 

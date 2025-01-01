@@ -66,7 +66,7 @@ namespace POS.Pages
             
             if (string.IsNullOrEmpty(accessToken))
             {
-                return RedirectToPage("/signin");
+                return Redirect("/signin");
             }
 
 

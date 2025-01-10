@@ -1,0 +1,256 @@
+﻿@page
+@model transfercardsModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dreams Pos admin template</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>Transfer Cards</h4>
+                        <h6>Manage your Cards Transfer</h6>
+                    </div>
+                    <div class="page-btn">
+                        <a href="addcustomer.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img">Add Transfer</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-top">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group d-flex">
+                                    <select id="organizationSelect" class="form-control" asp-items="Model.OrganizationList">
+                                        <option value="">Select an organization</option> 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="selectAll" /> 
+                                        </th>
+                                        <th>Card ID</th>
+                                        <th>Assigned</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cardTableBody">
+                                </tbody>
+                            </table>
+                            <div class="mt-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2">
+                                        <select id="orgselect" class="form-control" asp-items="Model.OrganizationList">
+                                            <option value="">Select an organization</option> 
+                                        </select>
+                                    </div>
+
+                                    <div class="me-2">
+                                        <select class="form-control" id="RF_Branch">
+                                            <option value="">Select a branch</option>
+                                        </select>
+                                    </div>
+                                    <button id="submitSelectedCards" class="btn btn-primary">Transfer</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#selectAll').change(function () {
+            const isChecked = $(this).is(':checked');
+            $('input[type="checkbox"]').prop('checked', isChecked);
+            });
+
+            $('#organizationSelect').change(function () {
+                var selectedOrganizationId = $(this).val();
+
+                if (selectedOrganizationId) {
+                    $.ajax({
+                        url: '/transfercards?handler=Cards', 
+                        type: 'GET',
+                        data: { organizationId: selectedOrganizationId },
+                        success: function (data) {
+                            
+                            console.log(data); 
+                        },
+                        error: function () {
+                            alert('Failed to load cards.');
+                        }
+                    });
+                } else {
+                    console.log('No organization selected');
+                }
+            });
+        });
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#organizationSelect').change(function () {
+                var selectedOrganizationId = $(this).val();
+
+                if (selectedOrganizationId) {
+                    $.ajax({
+                        url: '/transfercards?handler=Cards',
+                        type: 'GET',
+                        data: { organizationId: selectedOrganizationId },
+                        success: function (data) {
+                            const tableBody = $('#cardTableBody');
+                            tableBody.empty();
+
+                            data.forEach(card => {
+                                const row = `
+                                    <tr>
+                                        <td><input type="checkbox" value="${card.id}" /></td>
+                                        <td>${card.cardId}</td>
+                                        <td>${card.assigned ? 'Yes' : 'No'}</td>
+                                    </tr>
+                                `;
+                                tableBody.append(row);
+                            });
+                        },
+                        error: function () {
+                            alert('Failed to load cards.');
+                        }
+                    });
+                } else {
+                    $('#cardTableBody').empty();
+                }
+            });
+
+            $('#submitSelectedCards').click(function () {
+                const selectedCardIds = Array.from($('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
+                const selectedOrganization = $('#organizationSelect').val(); 
+                const selectedBranch = $('#RF_Branch').val(); 
+
+                console.log("Selected Card IDs:", selectedCardIds);
+                console.log("Selected Organization:", selectedOrganization);
+                console.log("Selected Branch:", selectedBranch);
+
+                if (selectedCardIds.length > 0 && selectedOrganization && selectedBranch) {
+                    $.ajax({
+                        url: '/transfercards?handler=Submit',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            selectedCardIds: selectedCardIds,
+                            organizationId: selectedOrganization,
+                            branchId: selectedBranch
+                        }),
+
+                        success: function (response) {
+                            alert('Selected cards submitted successfully!');
+                        },
+                        error: function (xhr) {
+                            console.error(xhr);
+                            alert('Failed to submit selected cards: ' + xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert('Please select at least one card, an organization, and a branch to submit.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#orgselect').change(function () {
+                var selectedOrganizationId = $(this).val();
+
+                if (selectedOrganizationId) {
+                    $.ajax({
+                        url: '/transfercards?handler=Branches',
+                        type: 'GET',
+                        data: { organizationId: selectedOrganizationId },
+                        success: function (data) {
+                            var branchSelect = $('#RF_Branch');
+                            branchSelect.empty();
+                            branchSelect.append($('<option>').val('').text('Select a branch'));
+
+                            $.each(data, function (index, branch) {
+                                branchSelect.append($('<option>').val(branch.value).text(branch.text));
+                            });
+                        },
+                        error: function () {
+                            alert('Failed to load branches.');
+                        }
+                    });
+                } else {
+                    $('#RF_Branch').empty().append($('<option>').val('').text('Select a branch'));
+                }
+            });
+        });
+    </script>
+
+   <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/feather.min.js"></script>
+
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/plugins/select2/js/select2.min.js"></script>
+
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+    <script src="assets/js/script.js"></script>
+</body>

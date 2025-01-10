@@ -51,6 +51,8 @@ namespace POS.Pages
 
             [Required]
             public string Member { get; set; }
+
+            public string PhoneNumber { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -151,6 +153,7 @@ namespace POS.Pages
                 amount = POS.Amount,
                 purpose = POS.Purpose,
                 card_id = POS.HiddenCardID,
+                phone_number = POS.PhoneNumber,
                 //member_id = POS.Member,
             };
 

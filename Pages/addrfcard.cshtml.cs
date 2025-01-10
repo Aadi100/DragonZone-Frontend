@@ -121,7 +121,6 @@ namespace POS.Pages
 
             client.DefaultRequestHeaders.Add("x-session-key", accessToken);
 
-            // Fetch the branches from the API
             var apiUrl = $"{_appSettings.BaseUrl}";
             var response = await client.GetAsync($"{apiUrl}/api/branch/list_branchs_ids");
 

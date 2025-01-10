@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
+using static POS.Pages.configModel;
 
 namespace POS.Services
 {
@@ -10,7 +11,6 @@ namespace POS.Services
         private readonly SerialPort _port;
         private readonly ILogger<SerialPortService> _logger;
         private readonly ConcurrentQueue<string> _dataQueue = new ConcurrentQueue<string>();
-        private bool _disposed = false;
 
         public SerialPortService(ILogger<SerialPortService> logger)
         {
@@ -25,22 +25,20 @@ namespace POS.Services
             try
             {
                 _port.Open();
-                _logger.LogInformation("Serial port opened.");
+                _port.DataReceived += Port_DataReceived;
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
-                _logger.LogError("Access to the port is denied. Please check if the device is connected.");
+                _logger.LogError(ex, "Access denied to the serial port. Make sure the port is not in use.");
             }
-            catch (IOException)
+            catch (IOException ex)
             {
-                _logger.LogError("Port is not available. Please connect the device.");
+                _logger.LogError(ex, "Error opening the serial port. Please check the port settings.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while opening the serial port.");
+                _logger.LogError(ex, "An unexpected error occurred while opening the serial port.");
             }
-
-            _port.DataReceived += Port_DataReceived;
         }
 
         private void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -50,14 +48,6 @@ namespace POS.Services
                 string data = _port.ReadExisting();
                 _dataQueue.Enqueue(data);
                 _logger.LogInformation($"Data Received: {data}");
-            }
-            catch (TimeoutException ex)
-            {
-                _logger.LogWarning("Read operation timed out.", ex);
-            }
-            catch (IOException ex)
-            {
-                _logger.LogError(ex, "I/O error while reading from serial port.");
             }
             catch (Exception ex)
             {
@@ -72,25 +62,11 @@ namespace POS.Services
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
+            if (_port != null)
             {
-                if (disposing)
-                {
-                    _port.DataReceived -= Port_DataReceived;
-                    if (_port.IsOpen)
-                    {
-                        _port.Close();
-                        _logger.LogInformation("Serial port closed.");
-                    }
-                    _port.Dispose();
-                }
-                _disposed = true;
+                _port.DataReceived -= Port_DataReceived;
+                if (_port.IsOpen) _port.Close();
+                _port.Dispose();
             }
         }
     }

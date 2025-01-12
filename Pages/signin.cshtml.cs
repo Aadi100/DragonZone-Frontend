@@ -64,13 +64,13 @@ namespace POS.Pages
                 string userId = responseObject.response_data.user.id;
                 string branch = responseObject.response_data.user.branch;
                 string organization = responseObject.response_data.user.organization;
-                //string roleName = responseObject.response_data.user.role_name;
+                string roleName = responseObject.response_data.user.role.name;
 
                 HttpContext.Session.SetString("SessionToken", accessToken);
                 HttpContext.Session.SetString("UserId", userId);
                 HttpContext.Session.SetString("UserBranch", branch);
                 HttpContext.Session.SetString("UserOrganization", organization);
-                //HttpContext.Session.SetString("UserRole", roleName);
+                HttpContext.Session.SetString("UserRole", roleName);
 
                 if (accessToken != null)
                 {
@@ -104,7 +104,12 @@ namespace POS.Pages
             public string id { get; set; }
             public string branch { get; set; }
             public string organization { get; set; }
-            public string role_name { get; set; }
+            public Role role { get; set; }
+        }
+
+        public class Role
+        {
+            public string name { get; set; }  
         }
     }
 }

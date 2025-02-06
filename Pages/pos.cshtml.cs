@@ -43,13 +43,13 @@ namespace POS.Pages
             [Required]
             public string Purpose { get; set; }
 
-            [Required]
+
             public string Card_id { get; set; } // Used for displaying the card_id in the textbox
 
-            [Required]
+
             public string HiddenCardID { get; set; } // This will store the respective id and be sent in the POST request
 
-            [Required]
+
             public string Member { get; set; }
 
             public string PhoneNumber { get; set; }

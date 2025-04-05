@@ -69,6 +69,12 @@ namespace POS.Pages
             [Required]
             public string Organization { get; set; }
 
+            [Required]
+            public int Percentage { get; set; }
+
+            [Required]
+            public int Credit_Limit { get; set; }
+
 
         }
 
@@ -186,6 +192,8 @@ namespace POS.Pages
                 opening_time = Branch.Opening_Time,
                 closing_time = Branch.Closing_Time,
                 organization = Branch.Organization,
+                percentage = Branch.Percentage,
+                credit_limit = Branch.Credit_Limit
 
             };
 

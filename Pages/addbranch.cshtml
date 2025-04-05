@@ -59,6 +59,11 @@
                                         <select asp-for="Branch.User" class="form-control" asp-items="Model.UsersList"></select>
                                         <span asp-validation-for="Branch.User" class="text-danger"></span>
                                     </div>
+                                    <div class="form-group">
+                                        <label asp-for="Branch.Credit_Limit"></label>
+                                        <input asp-for="Branch.Credit_Limit" class="form-control" />
+                                        <span asp-validation-for="Branch.Credit_Limit" class="text-danger"></span>
+                                    </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
@@ -90,6 +95,11 @@
                                         <label asp-for="Branch.Closing_Time"></label>
                                         <input asp-for="Branch.Closing_Time" class="form-control" />
                                         <span asp-validation-for="Branch.Closing_Time" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Branch.Percentage"></label>
+                                        <input asp-for="Branch.Percentage" class="form-control" />
+                                        <span asp-validation-for="Branch.Percentage" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">

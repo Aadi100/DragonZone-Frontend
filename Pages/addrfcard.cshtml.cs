@@ -50,6 +50,9 @@ namespace POS.Pages
 
             [Required]
             public string Assigned { get; set; }
+
+            [Required]
+            public int Credit { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -160,7 +163,8 @@ namespace POS.Pages
                 card_uid = RF.UID,
                 branch = RF.Branch,
                 organization = RF.Organization,
-                assigned = RF.Assigned
+                assigned = RF.Assigned,
+                credit = RF.Credit
             };
 
             var content = new StringContent(JsonSerializer.Serialize(rfcardData), Encoding.UTF8, "application/json");

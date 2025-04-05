@@ -59,7 +59,8 @@ namespace POS.Pages
             [Required]
             public List<string> CP_Phone_Number { get; set; }
 
-
+            [Required]
+            public int Percentage { get; set; }
             public string NTN { get; set; }
         }
 
@@ -80,10 +81,7 @@ namespace POS.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+
 
             var client = _httpClientFactory.CreateClient();
 
@@ -100,7 +98,8 @@ namespace POS.Pages
                 cp_name = ORG.CP_Name,
                 cp_email_address = ORG.CP_Email_Address,
                 cp_phone_number = ORG.CP_Phone_Number,
-                ntn = ORG.NTN
+                ntn = ORG.NTN,
+                percentage = ORG.Percentage
             };
 
             var content = new StringContent(JsonSerializer.Serialize(orgData), Encoding.UTF8, "application/json");

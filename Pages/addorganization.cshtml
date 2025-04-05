@@ -96,6 +96,13 @@
                                         <span asp-validation-for="ORG.CP_Email_Address" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label asp-for="ORG.Percentage"></label>
+                                        <input asp-for="ORG.Percentage" class="form-control" />
+                                        <span asp-validation-for="ORG.Percentage" class="text-danger"></span>
+                                    </div>
+                                </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-submit me-2">Submit</button>
                                     <a asp-page="/productlist" class="btn btn-cancel">Cancel</a>
